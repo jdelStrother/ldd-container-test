@@ -1,0 +1,32 @@
+name: Main
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  ldd-test-with-container:
+    runs-on: ubuntu-latest
+    container: ubuntu:20.04
+    steps:
+      - run: |
+          $RUNNER_TOOL_CACHE/Ruby/3.0.3/x64/bin/ruby --version || true
+      - run: |
+          ls -l $RUNNER_TOOL_CACHE/Ruby/3.0.3/x64/lib/
+      - run: |
+          ldd $RUNNER_TOOL_CACHE/Ruby/3.0.3/x64/bin/ruby
+
+
+
+  ldd-test-without-container:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          $RUNNER_TOOL_CACHE/Ruby/3.0.3/x64/bin/ruby --version || true
+      - run: |
+          ls -l $RUNNER_TOOL_CACHE/Ruby/3.0.3/x64/lib/
+      - run: |
+          ldd $RUNNER_TOOL_CACHE/Ruby/3.0.3/x64/bin/ruby
+
+
+
